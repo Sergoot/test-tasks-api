@@ -1,0 +1,26 @@
+version: '3.3'
+
+services:
+  backend:
+    build: .
+    container_name: tasks_backend
+    command: uvicorn app.main:app --reload --host=${APP_HOST} --port=${APP_PORT} 
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_HOST=db
+    volumes:
+      - .:/app
+    ports:
+      - ${APP_PORT}:${APP_PORT}
+    depends_on:
+      - db
+
+  db:
+    image: postgres:14
+    container_name: tasks_db
+    env_file:
+      - .env
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+

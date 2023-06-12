@@ -10,7 +10,7 @@ packages = [{include = "test_tasks"}]
 python = "^3.10"
 sqlalchemy = "^2.0.16"
 fastapi = "^0.97.0"
-gunicorn = {extras = ["standart"], version = "^20.1.0"}
+uvicorn = {extras = ["standart"], version = "^0.22.0"}
 
 
 [build-system]
