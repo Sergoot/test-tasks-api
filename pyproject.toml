@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "test-tasks"
+version = "0.1.0"
+description = ""
+authors = ["lootawin sergey.lyutavin22@mail.ru"]
+readme = "README.md"
+packages = [{include = "test_tasks"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+sqlalchemy = "^2.0.16"
+fastapi = "^0.97.0"
+gunicorn = {extras = ["standart"], version = "^20.1.0"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
