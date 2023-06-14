@@ -48,5 +48,10 @@ COPY --from=builder-base $PYSETUP_PATH $PYSETUP_PATH
 WORKDIR $PYSETUP_PATH
 RUN poetry install --no-root
 
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
+
 WORKDIR /app
 COPY . .
+
+ENTRYPOINT /docker-entrypoint.sh $0 $@
