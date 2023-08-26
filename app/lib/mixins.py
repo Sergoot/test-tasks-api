@@ -11,6 +11,17 @@ from app.shemas import BaseShema
 ModelType = TypeVar("ModelType", bound=Base)
 
 
+class GetByIdMixin(MixinBase[ModelType]):
+
+    async def get_by_id(
+        self,
+        _id: int
+    ) -> ModelType:
+        stmt = select(self._model).where(self._model.id == _id)
+        obj = await self._session.execute(stmt)
+        return obj.scalars().first()
+
+
 class GetByFilterMixin(MixinBase[ModelType]):
 
     async def get_by_filters(
