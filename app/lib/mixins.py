@@ -48,3 +48,4 @@ class DeleteByIdMixin(MixinBase[ModelType]) :
     async def delete(self, _id: int) -> None:
         stmt = delete(self._model).where(self._model.id == _id)
         await self._session.execute(stmt)
+        await self._session.commit()
