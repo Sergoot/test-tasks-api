@@ -14,13 +14,15 @@ ModelType = TypeVar("ModelType", bound=Base)
 class GetByFilterMixin(MixinBase[ModelType]):
 
     async def get_by_filters(
-        self, 
+        self,
+        offset: int = 0,
+        limit: int = 100,
         *filters: ColumnExpressionArgument[bool]
     ) -> Sequence[ModelType] | None:
         
-        stmt = select(self._model).where(*filters)
+        stmt = select(self._model).where(*filters).offset(offset).limit(limit)
         objs = await self._session.execute(stmt)
-        return objs.all()
+        return objs.scalars().all()
     
 
 CreateShema = TypeVar("CreateShema", bound=BaseShema)
