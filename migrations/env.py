@@ -48,7 +48,7 @@ def run_migrations_offline() -> None:
 
     """
     url = settings.SQLALCHEMY_DATABES_URL
-    print(url)
+
     context.configure(
         url=url,
         target_metadata=target_metadata,
