@@ -1,5 +1,3 @@
-from typing import Any
-
 from fastapi import APIRouter, Depends, HTTPException, status
 
 from app.api.tasks.service import TaskService

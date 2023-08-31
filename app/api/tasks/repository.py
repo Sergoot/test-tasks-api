@@ -12,7 +12,6 @@ from app.lib.mixins import (
     GetByIdMixin
 )
 
-
 class TaskRepository(
     BaseRepo[Task],
     GetByIdMixin[Task],

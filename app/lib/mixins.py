@@ -34,12 +34,24 @@ class GetByFilterMixin(MixinBase[ModelType]):
         stmt = select(self._model).where(*filters).offset(offset).limit(limit)
         objs = await self._session.execute(stmt)
         return objs.scalars().all()
+
+
+class GetOnByFilterMixin(MixinBase[ModelType]):
     
+    async def get_one_by_filter(
+        self, 
+        *filters: ColumnExpressionArgument[bool]
+    ) -> ModelType | None:
+        stmt = select(self._model).where(*filters)
+        objs = await self._session.execute(stmt)
+        return objs.scalars().first() 
+        
 
 CreateShema = TypeVar("CreateShema", bound=BaseShema)
 
 
-class CreateMixin(MixinBase[ModelType], Generic[ModelType, CreateShema]) :
+class CreateMixin(MixinBase[ModelType], Generic[ModelType, CreateShema]):
+    
     async def create(
         self, 
         create_data: CreateShema
